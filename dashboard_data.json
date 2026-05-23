@@ -1,0 +1,166 @@
+{
+  "briefings": [
+    {
+      "id": "2026-05-23-2100",
+      "timestamp": "2026-05-23T21:00:00+08:00",
+      "period": "Evening",
+      "items": [
+        {
+          "rank": 1,
+          "emoji": "🐋",
+          "headline": "BTC whale accumulated 500 BTC across 3 wallets in last 2h",
+          "source": "Whale Monitor + Scanner",
+          "recommendation": "Watch for long entry if price holds $107K support — strong accumulation signal",
+          "scores": { "novelty": 3, "actionability": 4, "confidence": 4 },
+          "tags": ["btc", "whale", "bullish"]
+        },
+        {
+          "rank": 2,
+          "emoji": "🔥",
+          "headline": "ETH gas fees spike 340% — heavy DeFi activity on Uniswap V4",
+          "source": "Gas Tracker + DeFi Monitor",
+          "recommendation": "Monitor UNI and related DeFi tokens for momentum plays",
+          "scores": { "novelty": 4, "actionability": 3, "confidence": 5 },
+          "tags": ["eth", "defi", "gas"]
+        },
+        {
+          "rank": 3,
+          "emoji": "📰",
+          "headline": "SEC announces expedited review of 3 new spot ETF applications",
+          "source": "News Feed + Regulatory Monitor",
+          "recommendation": "Potential catalyst — track related assets for pre-news positioning",
+          "scores": { "novelty": 5, "actionability": 4, "confidence": 3 },
+          "tags": ["regulation", "etf", "catalyst"]
+        },
+        {
+          "rank": 4,
+          "emoji": "📉",
+          "headline": "SOL funding rates flip negative — -0.012% across major exchanges",
+          "source": "Funding Rate Tracker",
+          "recommendation": "Contrarian bullish signal if price holds current range",
+          "scores": { "novelty": 2, "actionability": 3, "confidence": 3 },
+          "tags": ["sol", "funding", "bearish"]
+        },
+        {
+          "rank": 5,
+          "emoji": "🤖",
+          "headline": "AI agent token sector up 18% on average — FET, RENDER leading",
+          "source": "Sector Scanner + Social Sentiment",
+          "recommendation": "Sector rotation in progress — consider rebalancing AI allocation",
+          "scores": { "novelty": 3, "actionability": 5, "confidence": 4 },
+          "tags": ["ai", "sector-rotation", "bullish"]
+        }
+      ],
+      "accuracy": {
+        "total": 24,
+        "correct": 17,
+        "recent": [
+          "✅ BTC +4.7% (called bullish)",
+          "❌ SOL -2.9% (called neutral)",
+          "✅ ETH +3.1% (called bullish)",
+          "✅ FET +12.4% (called bullish)",
+          "❌ DOGE -1.2% (called bullish)"
+        ]
+      }
+    },
+    {
+      "id": "2026-05-23-0900",
+      "timestamp": "2026-05-23T09:00:00+08:00",
+      "period": "Morning",
+      "items": [
+        {
+          "rank": 1,
+          "emoji": "🏦",
+          "headline": "BlackRock BTC ETF inflows hit $890M — largest single day since January",
+          "source": "ETF Flow Monitor",
+          "recommendation": "Strong institutional demand — maintain long BTC exposure",
+          "scores": { "novelty": 4, "actionability": 4, "confidence": 5 },
+          "tags": ["btc", "etf", "institutional", "bullish"]
+        },
+        {
+          "rank": 2,
+          "emoji": "⚡",
+          "headline": "Lightning Network capacity reaches all-time high 5,800 BTC",
+          "source": "Network Monitor",
+          "recommendation": "Positive fundamental signal for BTC long-term thesis",
+          "scores": { "novelty": 3, "actionability": 2, "confidence": 5 },
+          "tags": ["btc", "lightning", "fundamentals"]
+        },
+        {
+          "rank": 3,
+          "emoji": "🌊",
+          "headline": "Stablecoin inflow surge — $2.1B USDT minted in 24h",
+          "source": "Stablecoin Tracker + Whale Monitor",
+          "recommendation": "Dry powder entering the market — expect volatility within 48h",
+          "scores": { "novelty": 4, "actionability": 4, "confidence": 4 },
+          "tags": ["stablecoins", "liquidity", "volatility"]
+        },
+        {
+          "rank": 4,
+          "emoji": "🔒",
+          "headline": "Major exchange outflows: 12,300 BTC withdrawn to cold storage",
+          "source": "Exchange Flow Monitor",
+          "recommendation": "Supply squeeze building — bullish medium-term",
+          "scores": { "novelty": 3, "actionability": 3, "confidence": 4 },
+          "tags": ["btc", "exchange-flows", "bullish"]
+        }
+      ],
+      "accuracy": {
+        "total": 20,
+        "correct": 14,
+        "recent": [
+          "✅ BTC +2.1% (called bullish)",
+          "✅ ETH +1.8% (called bullish)",
+          "❌ AVAX -3.4% (called bullish)",
+          "✅ LINK +5.2% (called bullish)",
+          "✅ Stablecoin thesis played out"
+        ]
+      }
+    },
+    {
+      "id": "2026-05-22-2100",
+      "timestamp": "2026-05-22T21:00:00+08:00",
+      "period": "Evening",
+      "items": [
+        {
+          "rank": 1,
+          "emoji": "🎯",
+          "headline": "Fed meeting minutes released — dovish tone, rate cut signals for September",
+          "source": "News Feed + Macro Monitor",
+          "recommendation": "Risk-on environment — increase crypto allocation to 15%",
+          "scores": { "novelty": 5, "actionability": 5, "confidence": 4 },
+          "tags": ["macro", "fed", "risk-on", "bullish"]
+        },
+        {
+          "rank": 2,
+          "emoji": "📊",
+          "headline": "BTC hash rate reaches new ATH — 750 EH/s",
+          "source": "Network Monitor",
+          "recommendation": "Network security at peak — positive long-term signal",
+          "scores": { "novelty": 2, "actionability": 2, "confidence": 5 },
+          "tags": ["btc", "hashrate", "fundamentals"]
+        },
+        {
+          "rank": 3,
+          "emoji": "🔥",
+          "headline": "Uniswap V4 launches on Base — fee switches activated",
+          "source": "DeFi Monitor + Social Sentiment",
+          "recommendation": "Track UNI and BASE ecosystem tokens for momentum",
+          "scores": { "novelty": 5, "actionability": 4, "confidence": 3 },
+          "tags": ["defi", "uniswap", "base", "catalyst"]
+        }
+      ],
+      "accuracy": {
+        "total": 16,
+        "correct": 11,
+        "recent": [
+          "✅ BTC +5.8% (called bullish on Fed)",
+          "✅ ETH +4.1% (called bullish)",
+          "❌ MATIC flat (called bullish)",
+          "✅ UNI +8.2% (called bullish on V4)"
+        ]
+      }
+    }
+  ],
+  "last_updated": "2026-05-23T21:05:00+08:00"
+}

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bubbles Intelligence</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-primary: #0a0015;
+    --bg-secondary: #1a0030;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --bg-card-hover: rgba(255, 255, 255, 0.07);
+    --bg-card-inner: rgba(255, 255, 255, 0.03);
+    --text-primary: #f0eef5;
+    --text-secondary: #a09aaf;
+    --text-muted: #6b6578;
+    --accent-purple: #a855f7;
+    --accent-purple-dim: rgba(168, 85, 247, 0.15);
+    --accent-green: #22c55e;
+    --accent-yellow: #eab308;
+    --accent-red: #ef4444;
+    --accent-blue: #3b82f6;
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --radius-lg: 16px;
+    --radius-md: 10px;
+    --radius-sm: 6px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(165deg, var(--bg-primary) 0%, var(--bg-secondary) 40%, #0d001a 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Ambient background glow */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 32px;
+  }
+
+  .header-logo {
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .header-title {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f0eef5 0%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+
+  .header-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .header-meta .dot {
+    width: 4px;
+    height: 4px;
+    background: var(--text-muted);
+    border-radius: 50%;
+  }
+
+  .refresh-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--accent-green);
+    margin-top: 12px;
+    opacity: 0.8;
+  }
+
+  .refresh-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  /* Accuracy Section */
+  .accuracy-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .accuracy-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+  }
+
+  .accuracy-score {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent-purple);
+  }
+
+  .accuracy-details {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-left: auto;
+  }
+
+  .accuracy-recent {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    width: 100%;
+  }
+
+  .accuracy-recent span {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--bg-card-inner);
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  .accuracy-recent span.hit { color: var(--accent-green); background: rgba(34, 197, 94, 0.1); }
+  .accuracy-recent span.miss { color: var(--accent-red); background: rgba(239, 68, 68, 0.1); }
+
+  /* Briefing Section */
+  .briefing-section {
+    margin-bottom: 32px;
+    animation: fadeSlideUp 0.6s ease-out both;
+  }
+
+  .briefing-section:nth-child(2) { animation-delay: 0.1s; }
+  .briefing-section:nth-child(3) { animation-delay: 0.2s; }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .briefing-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-left: 2px;
+  }
+
+  .briefing-period {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .briefing-date {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 12px;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    animation: cardAppear 0.5s ease-out both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  @keyframes cardAppear {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-rank {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-purple);
+    background: var(--accent-purple-dim);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .card-emoji {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .card-headline {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .card-source {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    padding-left: 62px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card-source::before {
+    content: '↳';
+    font-size: 12px;
+  }
+
+  /* Score bars */
+  .card-scores {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-left: 62px;
+  }
+
+  .score-item {
+    flex: 1;
+    max-width: 120px;
+  }
+
+  .score-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .score-bar-bg {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 0;
+  }
+
+  .score-bar-fill.high { background: var(--accent-green); box-shadow: 0 0 8px rgba(34, 197, 94, 0.3); }
+  .score-bar-fill.medium { background: var(--accent-yellow); box-shadow: 0 0 8px rgba(234, 179, 8, 0.3); }
+  .score-bar-fill.low { background: var(--accent-red); box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); }
+
+  /* Recommendation */
+  .card-recommendation {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(59, 130, 246, 0.05));
+    border-left: 3px solid var(--accent-purple);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    margin-left: 62px;
+  }
+
+  .card-recommendation .rec-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent-purple);
+    margin-bottom: 3px;
+  }
+
+  .card-recommendation .rec-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Tags */
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding-left: 62px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+  }
+
+  .tag.bullish { color: var(--accent-green); border-color: rgba(34, 197, 94, 0.2); background: rgba(34, 197, 94, 0.06); }
+  .tag.bearish { color: var(--accent-red); border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.06); }
+  .tag.catalyst { color: var(--accent-yellow); border-color: rgba(234, 179, 8, 0.2); background: rgba(234, 179, 8, 0.06); }
+  .tag.btc { color: #f7931a; border-color: rgba(247, 147, 26, 0.2); background: rgba(247, 147, 26, 0.06); }
+  .tag.eth { color: #627eea; border-color: rgba(98, 126, 234, 0.2); background: rgba(98, 126, 234, 0.06); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 20px;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* Loading state */
+  .loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border-subtle);
+    border-top-color: var(--accent-purple);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Error state */
+  .error-msg {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--accent-red);
+    font-size: 13px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container { padding: 12px 12px 40px; }
+    .header-title { font-size: 24px; }
+    .card { padding: 16px; }
+    .card-source,
+    .card-scores,
+    .card-recommendation,
+    .card-tags { padding-left: 0; margin-left: 0; }
+    .card-scores { gap: 10px; }
+    .card-top { gap: 10px; }
+    .accuracy-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .accuracy-details { margin-left: 0; }
+    .briefing-header { flex-direction: column; gap: 2px; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-logo">🧠 Bubbles</div>
+    <h1 class="header-title">Intelligence Dashboard</h1>
+    <div class="header-meta">
+      <span id="updateTime">Loading…</span>
+    </div>
+    <div class="refresh-indicator">
+      <span class="refresh-dot"></span>
+      <span id="refreshTimer">Auto-refresh in 60s</span>
+    </div>
+  </div>
+
+  <div id="content"></div>
+
+  <div class="footer">
+    <div class="footer-text">Bubbles Intelligence • Real-time crypto analysis</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const DATA_PATH = '/dashboard_data.json';
+  let countdown = 60;
+  let countdownInterval;
+
+  function getScoreClass(val) {
+    if (val >= 4) return 'high';
+    if (val >= 3) return 'medium';
+    return 'low';
+  }
+
+  function getTagClass(tag) {
+    const special = ['bullish', 'bearish', 'catalyst', 'btc', 'eth'];
+    return special.includes(tag) ? tag : '';
+  }
+
+  function formatTimestamp(ts) {
+    const d = new Date(ts);
+    const opts = { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
+    return d.toLocaleString('en-US', opts);
+  }
+
+  function formatDate(ts) {
+    const d = new Date(ts);
+    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  }
+
+  function renderAccuracy(acc) {
+    if (!acc) return '';
+    const pct = acc.total > 0 ? Math.round((acc.correct / acc.total) * 100) : 0;
+
+    let recentHtml = '';
+    if (acc.recent && acc.recent.length) {
+      recentHtml = `<div class="accuracy-recent">
+        ${acc.recent.map(r => {
+          const isHit = r.startsWith('✅');
+          return `<span class="${isHit ? 'hit' : 'miss'}">${r}</span>`;
+        }).join('')}
+      </div>`;
+    }
+
+    return `<div class="accuracy-bar">
+      <span class="accuracy-label">Accuracy</span>
+      <span class="accuracy-score">${pct}%</span>
+      <span class="accuracy-details">${acc.correct} of ${acc.total} calls correct</span>
+      ${recentHtml}
+    </div>`;
+  }
+
+  function renderCard(item, index) {
+    const scores = item.scores || {};
+    const scoreEntries = Object.entries(scores);
+
+    const scoresHtml = scoreEntries.map(([key, val]) => {
+      const pct = (val / 5) * 100;
+      const cls = getScoreClass(val);
+      return `<div class="score-item">
+        <div class="score-label">${key}</div>
+        <div class="score-bar-bg">
+          <div class="score-bar-fill ${cls}" data-width="${pct}"></div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const tagsHtml = (item.tags || []).map(t =>
+      `<span class="tag ${getTagClass(t)}">${t}</span>`
+    ).join('');
+
+    const recHtml = item.recommendation ?
+      `<div class="card-recommendation">
+        <div class="rec-label">💡 Recommendation</div>
+        <div class="rec-text">${item.recommendation}</div>
+      </div>` : '';
+
+    return `<div class="card" style="animation-delay: ${index * 0.08}s">
+      <div class="card-top">
+        <span class="card-rank">#${item.rank}</span>
+        <span class="card-emoji">${item.emoji}</span>
+        <span class="card-headline">${item.headline}</span>
+      </div>
+      <div class="card-source">${item.source || ''}</div>
+      <div class="card-scores">${scoresHtml}</div>
+      ${recHtml}
+      <div class="card-tags">${tagsHtml}</div>
+    </div>`;
+  }
+
+  function renderBriefing(briefing) {
+    const itemsHtml = (briefing.items || []).map((item, i) => renderCard(item, i)).join('');
+
+    return `<div class="briefing-section">
+      <div class="briefing-header">
+        <span class="briefing-period">${briefing.period} Briefing</span>
+        <span class="briefing-date">${formatDate(briefing.timestamp)}</span>
+      </div>
+      ${renderAccuracy(briefing.accuracy)}
+      ${itemsHtml}
+    </div>`;
+  }
+
+  function render(data) {
+    const el = document.getElementById('content');
+    if (!data || !data.briefings || !data.briefings.length) {
+      el.innerHTML = '<div class="loading">No briefings available</div>';
+      return;
+    }
+
+    el.innerHTML = data.briefings.map(b => renderBriefing(b)).join('');
+
+    // Animate score bars
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.score-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      });
+    });
+  }
+
+  async function fetchData() {
+    try {
+      const res = await fetch(DATA_PATH + '?t=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      render(data);
+
+      const ts = data.last_updated ? formatTimestamp(data.last_updated) : 'Just now';
+      document.getElementById('updateTime').textContent = 'Updated ' + ts;
+    } catch (e) {
+      console.error('Fetch error:', e);
+      document.getElementById('content').innerHTML =
+        '<div class="error-msg">⚠ Failed to load intelligence data<br><small>' + e.message + '</small></div>';
+    }
+  }
+
+  function startCountdown() {
+    clearInterval(countdownInterval);
+    countdown = 60;
+    updateCountdown();
+    countdownInterval = setInterval(() => {
+      countdown--;
+      updateCountdown();
+      if (countdown <= 0) {
+        fetchData();
+        countdown = 60;
+      }
+    }, 1000);
+  }
+
+  function updateCountdown() {
+    document.getElementById('refreshTimer').textContent =
+      countdown > 0 ? `Auto-refresh in ${countdown}s` : 'Refreshing…';
+  }
+
+  // Init
+  fetchData();
+  startCountdown();
+})();
+</script>
+</body>
+</html>
