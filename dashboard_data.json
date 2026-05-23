@@ -1,65 +1,213 @@
 {
   "briefings": [
     {
+      "id": "2026-05-23-2149",
+      "timestamp": "2026-05-23T21:49:55.989675+08:00",
+      "period": "Evening",
+      "items": [
+        {
+          "emoji": "\ud83d\udcc4",
+          "headline": "From Risk to Rescue: An Agentic Survival Analysis Framework for Liquidation Prev",
+          "source": "arXiv Research",
+          "detail": "Autonomous DeFi agents that predict and prevent liquidations using survival analysis represent a significant upgrade over static threshold monitoring. This has direct implications for DeFi position management bots and risk-aware lending strategies.",
+          "scores": {
+            "novelty": 5,
+            "actionability": 3,
+            "confidence": 3
+          },
+          "tags": [
+            "research",
+            "crypto"
+          ],
+          "url": "https://arxiv.org/abs/2604.14583",
+          "recommendation": "",
+          "raw_score": 9.0,
+          "rank": 1
+        },
+        {
+          "emoji": "\ud83d\udcc4",
+          "headline": "When Valid Signals Fail: Regime Boundaries Between LLM Features and RL Trading P",
+          "source": "arXiv Research",
+          "detail": "LLM features can enhance RL trading agents, but only within specific market regimes. The automated prompt-optimization approach is directly applicable to building regime-aware trading systems \u2014 don't blindly feed LLM signals to your agent; validate which conditions they work under.",
+          "scores": {
+            "novelty": 5,
+            "actionability": 3,
+            "confidence": 3
+          },
+          "tags": [
+            "research",
+            "trading"
+          ],
+          "url": "https://arxiv.org/abs/2604.10996",
+          "recommendation": "",
+          "raw_score": 8.0,
+          "rank": 2
+        },
+        {
+          "emoji": "\u26a1",
+          "headline": "Signal bridge waste at 71%",
+          "source": "Trading Analyst",
+          "detail": "unknown is the worst source",
+          "scores": {
+            "novelty": 2,
+            "actionability": 5,
+            "confidence": 5
+          },
+          "tags": [
+            "trading",
+            "signals"
+          ],
+          "url": "",
+          "recommendation": "",
+          "raw_score": 7,
+          "rank": 3
+        },
+        {
+          "emoji": "\ud83c\udfaf",
+          "headline": "SOL is down $228. Review SOL strategy parameters.",
+          "source": "Trading Analyst",
+          "detail": "",
+          "scores": {
+            "novelty": 2,
+            "actionability": 5,
+            "confidence": 4
+          },
+          "tags": [
+            "trading",
+            "action"
+          ],
+          "url": "",
+          "recommendation": "SOL is down $228. Review SOL strategy parameters.",
+          "raw_score": 7,
+          "rank": 4
+        },
+        {
+          "emoji": "\ud83c\udfaf",
+          "headline": "Increase scanner_breaking signal weight \u2014 strong 62.5% win rate over 16 signals.",
+          "source": "Trading Analyst",
+          "detail": "",
+          "scores": {
+            "novelty": 2,
+            "actionability": 5,
+            "confidence": 4
+          },
+          "tags": [
+            "trading",
+            "action"
+          ],
+          "url": "",
+          "recommendation": "Increase scanner_breaking signal weight \u2014 strong 62.5% win rate over 16 signals.",
+          "raw_score": 7,
+          "rank": 5
+        }
+      ],
+      "accuracy": {
+        "total": 0,
+        "correct": 0,
+        "pct": 0,
+        "recent": []
+      }
+    },
+    {
       "id": "2026-05-23-2100",
       "timestamp": "2026-05-23T21:00:00+08:00",
       "period": "Evening",
       "items": [
         {
           "rank": 1,
-          "emoji": "🐋",
+          "emoji": "\ud83d\udc0b",
           "headline": "BTC whale accumulated 500 BTC across 3 wallets in last 2h",
           "source": "Whale Monitor + Scanner",
-          "recommendation": "Watch for long entry if price holds $107K support — strong accumulation signal",
-          "scores": { "novelty": 3, "actionability": 4, "confidence": 4 },
-          "tags": ["btc", "whale", "bullish"]
+          "recommendation": "Watch for long entry if price holds $107K support \u2014 strong accumulation signal",
+          "scores": {
+            "novelty": 3,
+            "actionability": 4,
+            "confidence": 4
+          },
+          "tags": [
+            "btc",
+            "whale",
+            "bullish"
+          ]
         },
         {
           "rank": 2,
-          "emoji": "🔥",
-          "headline": "ETH gas fees spike 340% — heavy DeFi activity on Uniswap V4",
+          "emoji": "\ud83d\udd25",
+          "headline": "ETH gas fees spike 340% \u2014 heavy DeFi activity on Uniswap V4",
           "source": "Gas Tracker + DeFi Monitor",
           "recommendation": "Monitor UNI and related DeFi tokens for momentum plays",
-          "scores": { "novelty": 4, "actionability": 3, "confidence": 5 },
-          "tags": ["eth", "defi", "gas"]
+          "scores": {
+            "novelty": 4,
+            "actionability": 3,
+            "confidence": 5
+          },
+          "tags": [
+            "eth",
+            "defi",
+            "gas"
+          ]
         },
         {
           "rank": 3,
-          "emoji": "📰",
+          "emoji": "\ud83d\udcf0",
           "headline": "SEC announces expedited review of 3 new spot ETF applications",
           "source": "News Feed + Regulatory Monitor",
-          "recommendation": "Potential catalyst — track related assets for pre-news positioning",
-          "scores": { "novelty": 5, "actionability": 4, "confidence": 3 },
-          "tags": ["regulation", "etf", "catalyst"]
+          "recommendation": "Potential catalyst \u2014 track related assets for pre-news positioning",
+          "scores": {
+            "novelty": 5,
+            "actionability": 4,
+            "confidence": 3
+          },
+          "tags": [
+            "regulation",
+            "etf",
+            "catalyst"
+          ]
         },
         {
           "rank": 4,
-          "emoji": "📉",
-          "headline": "SOL funding rates flip negative — -0.012% across major exchanges",
+          "emoji": "\ud83d\udcc9",
+          "headline": "SOL funding rates flip negative \u2014 -0.012% across major exchanges",
           "source": "Funding Rate Tracker",
           "recommendation": "Contrarian bullish signal if price holds current range",
-          "scores": { "novelty": 2, "actionability": 3, "confidence": 3 },
-          "tags": ["sol", "funding", "bearish"]
+          "scores": {
+            "novelty": 2,
+            "actionability": 3,
+            "confidence": 3
+          },
+          "tags": [
+            "sol",
+            "funding",
+            "bearish"
+          ]
         },
         {
           "rank": 5,
-          "emoji": "🤖",
-          "headline": "AI agent token sector up 18% on average — FET, RENDER leading",
+          "emoji": "\ud83e\udd16",
+          "headline": "AI agent token sector up 18% on average \u2014 FET, RENDER leading",
           "source": "Sector Scanner + Social Sentiment",
-          "recommendation": "Sector rotation in progress — consider rebalancing AI allocation",
-          "scores": { "novelty": 3, "actionability": 5, "confidence": 4 },
-          "tags": ["ai", "sector-rotation", "bullish"]
+          "recommendation": "Sector rotation in progress \u2014 consider rebalancing AI allocation",
+          "scores": {
+            "novelty": 3,
+            "actionability": 5,
+            "confidence": 4
+          },
+          "tags": [
+            "ai",
+            "sector-rotation",
+            "bullish"
+          ]
         }
       ],
       "accuracy": {
         "total": 24,
         "correct": 17,
         "recent": [
-          "✅ BTC +4.7% (called bullish)",
-          "❌ SOL -2.9% (called neutral)",
-          "✅ ETH +3.1% (called bullish)",
-          "✅ FET +12.4% (called bullish)",
-          "❌ DOGE -1.2% (called bullish)"
+          "\u2705 BTC +4.7% (called bullish)",
+          "\u274c SOL -2.9% (called neutral)",
+          "\u2705 ETH +3.1% (called bullish)",
+          "\u2705 FET +12.4% (called bullish)",
+          "\u274c DOGE -1.2% (called bullish)"
         ]
       }
     },
@@ -70,50 +218,83 @@
       "items": [
         {
           "rank": 1,
-          "emoji": "🏦",
-          "headline": "BlackRock BTC ETF inflows hit $890M — largest single day since January",
+          "emoji": "\ud83c\udfe6",
+          "headline": "BlackRock BTC ETF inflows hit $890M \u2014 largest single day since January",
           "source": "ETF Flow Monitor",
-          "recommendation": "Strong institutional demand — maintain long BTC exposure",
-          "scores": { "novelty": 4, "actionability": 4, "confidence": 5 },
-          "tags": ["btc", "etf", "institutional", "bullish"]
+          "recommendation": "Strong institutional demand \u2014 maintain long BTC exposure",
+          "scores": {
+            "novelty": 4,
+            "actionability": 4,
+            "confidence": 5
+          },
+          "tags": [
+            "btc",
+            "etf",
+            "institutional",
+            "bullish"
+          ]
         },
         {
           "rank": 2,
-          "emoji": "⚡",
+          "emoji": "\u26a1",
           "headline": "Lightning Network capacity reaches all-time high 5,800 BTC",
           "source": "Network Monitor",
           "recommendation": "Positive fundamental signal for BTC long-term thesis",
-          "scores": { "novelty": 3, "actionability": 2, "confidence": 5 },
-          "tags": ["btc", "lightning", "fundamentals"]
+          "scores": {
+            "novelty": 3,
+            "actionability": 2,
+            "confidence": 5
+          },
+          "tags": [
+            "btc",
+            "lightning",
+            "fundamentals"
+          ]
         },
         {
           "rank": 3,
-          "emoji": "🌊",
-          "headline": "Stablecoin inflow surge — $2.1B USDT minted in 24h",
+          "emoji": "\ud83c\udf0a",
+          "headline": "Stablecoin inflow surge \u2014 $2.1B USDT minted in 24h",
           "source": "Stablecoin Tracker + Whale Monitor",
-          "recommendation": "Dry powder entering the market — expect volatility within 48h",
-          "scores": { "novelty": 4, "actionability": 4, "confidence": 4 },
-          "tags": ["stablecoins", "liquidity", "volatility"]
+          "recommendation": "Dry powder entering the market \u2014 expect volatility within 48h",
+          "scores": {
+            "novelty": 4,
+            "actionability": 4,
+            "confidence": 4
+          },
+          "tags": [
+            "stablecoins",
+            "liquidity",
+            "volatility"
+          ]
         },
         {
           "rank": 4,
-          "emoji": "🔒",
+          "emoji": "\ud83d\udd12",
           "headline": "Major exchange outflows: 12,300 BTC withdrawn to cold storage",
           "source": "Exchange Flow Monitor",
-          "recommendation": "Supply squeeze building — bullish medium-term",
-          "scores": { "novelty": 3, "actionability": 3, "confidence": 4 },
-          "tags": ["btc", "exchange-flows", "bullish"]
+          "recommendation": "Supply squeeze building \u2014 bullish medium-term",
+          "scores": {
+            "novelty": 3,
+            "actionability": 3,
+            "confidence": 4
+          },
+          "tags": [
+            "btc",
+            "exchange-flows",
+            "bullish"
+          ]
         }
       ],
       "accuracy": {
         "total": 20,
         "correct": 14,
         "recent": [
-          "✅ BTC +2.1% (called bullish)",
-          "✅ ETH +1.8% (called bullish)",
-          "❌ AVAX -3.4% (called bullish)",
-          "✅ LINK +5.2% (called bullish)",
-          "✅ Stablecoin thesis played out"
+          "\u2705 BTC +2.1% (called bullish)",
+          "\u2705 ETH +1.8% (called bullish)",
+          "\u274c AVAX -3.4% (called bullish)",
+          "\u2705 LINK +5.2% (called bullish)",
+          "\u2705 Stablecoin thesis played out"
         ]
       }
     },
@@ -124,43 +305,69 @@
       "items": [
         {
           "rank": 1,
-          "emoji": "🎯",
-          "headline": "Fed meeting minutes released — dovish tone, rate cut signals for September",
+          "emoji": "\ud83c\udfaf",
+          "headline": "Fed meeting minutes released \u2014 dovish tone, rate cut signals for September",
           "source": "News Feed + Macro Monitor",
-          "recommendation": "Risk-on environment — increase crypto allocation to 15%",
-          "scores": { "novelty": 5, "actionability": 5, "confidence": 4 },
-          "tags": ["macro", "fed", "risk-on", "bullish"]
+          "recommendation": "Risk-on environment \u2014 increase crypto allocation to 15%",
+          "scores": {
+            "novelty": 5,
+            "actionability": 5,
+            "confidence": 4
+          },
+          "tags": [
+            "macro",
+            "fed",
+            "risk-on",
+            "bullish"
+          ]
         },
         {
           "rank": 2,
-          "emoji": "📊",
-          "headline": "BTC hash rate reaches new ATH — 750 EH/s",
+          "emoji": "\ud83d\udcca",
+          "headline": "BTC hash rate reaches new ATH \u2014 750 EH/s",
           "source": "Network Monitor",
-          "recommendation": "Network security at peak — positive long-term signal",
-          "scores": { "novelty": 2, "actionability": 2, "confidence": 5 },
-          "tags": ["btc", "hashrate", "fundamentals"]
+          "recommendation": "Network security at peak \u2014 positive long-term signal",
+          "scores": {
+            "novelty": 2,
+            "actionability": 2,
+            "confidence": 5
+          },
+          "tags": [
+            "btc",
+            "hashrate",
+            "fundamentals"
+          ]
         },
         {
           "rank": 3,
-          "emoji": "🔥",
-          "headline": "Uniswap V4 launches on Base — fee switches activated",
+          "emoji": "\ud83d\udd25",
+          "headline": "Uniswap V4 launches on Base \u2014 fee switches activated",
           "source": "DeFi Monitor + Social Sentiment",
           "recommendation": "Track UNI and BASE ecosystem tokens for momentum",
-          "scores": { "novelty": 5, "actionability": 4, "confidence": 3 },
-          "tags": ["defi", "uniswap", "base", "catalyst"]
+          "scores": {
+            "novelty": 5,
+            "actionability": 4,
+            "confidence": 3
+          },
+          "tags": [
+            "defi",
+            "uniswap",
+            "base",
+            "catalyst"
+          ]
         }
       ],
       "accuracy": {
         "total": 16,
         "correct": 11,
         "recent": [
-          "✅ BTC +5.8% (called bullish on Fed)",
-          "✅ ETH +4.1% (called bullish)",
-          "❌ MATIC flat (called bullish)",
-          "✅ UNI +8.2% (called bullish on V4)"
+          "\u2705 BTC +5.8% (called bullish on Fed)",
+          "\u2705 ETH +4.1% (called bullish)",
+          "\u274c MATIC flat (called bullish)",
+          "\u2705 UNI +8.2% (called bullish on V4)"
         ]
       }
     }
   ],
-  "last_updated": "2026-05-23T21:05:00+08:00"
+  "last_updated": "2026-05-23T21:49:55.989675+08:00"
 }
